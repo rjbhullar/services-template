@@ -1,13 +1,12 @@
 import * as React from "react";
 import { TouchableOpacity, StyleSheet, Image } from "react-native";
-import Carousel from "react-native-looped-carousel";
+import Swiper from "react-native-swiper";
 import EditScreenInfo from "../components/EditScreenInfo";
 import { Text, View } from "../components/Themed";
 const LANDING_PAGE_DETAILS = {
   carousalCards: [
     {
-      imageURI:
-        "http://www.mericar.com/car_service_center/wp-content/uploads/2018/09/FB_IMG_1527053530825.jpg",
+      imageURI: "https://img.youtube.com/vi/AifjAze23lo/0.jpg",
       heading: [
         {
           color: "red",
@@ -24,7 +23,8 @@ const LANDING_PAGE_DETAILS = {
       ],
     },
     {
-      imageURI: "https://img.youtube.com/vi/AifjAze23lo/0.jpg",
+      imageURI:
+        "https://static.billboard.com/files/2020/04/eminem-press-photo-2019-aqu-billboard-1548-1587659998-compressed.jpg",
       heading: [
         {
           color: "red",
@@ -82,22 +82,28 @@ export default function TabOneScreen() {
           pageInfo
           onAnimateNextPage={(p) => console.log(p)}
         >
-          {LANDING_PAGE_DETAILS.carousalCards.map((card, index) => (
-            <View
-              key={"card" + index}
-              style={[{ backgroundColor: "#BADA55" }, this.state.size]}
-            >
-              <Image
-                source={{ uri: card.imageURI }}
-                style={styles.carousalImage}
-              />
-            </View>
-          ))}
+          
         </Carousel>
       </View> */}
+      <Swiper style={styles.container} showsButtons={true}>
+        {LANDING_PAGE_DETAILS.carousalCards.map((card, index) => (
+          <View
+            key={"card" + index}
+            style={[
+              { height: "100%", width: "100%" },
+            ]}
+          >
+            <Image
+              source={{ uri: card.imageURI }}
+              style={styles.carousalImage}
+            />
+          </View>
+        ))}
+      </Swiper>
       <View style={styles.container}>
-        {LANDING_PAGE_DETAILS.ctaPrimary.map((button) => (
+        {LANDING_PAGE_DETAILS.ctaPrimary.map((button, index) => (
           <TouchableOpacity
+            key={"button1" + index}
             // onPress={buttonCallbacks[button.actionType]}
             style={{ backgroundColor: button.bgColor, marginVertical: 10 }}
           >
@@ -110,8 +116,9 @@ export default function TabOneScreen() {
         ))}
       </View>
       <View>
-        {LANDING_PAGE_DETAILS.ctaSecondary.map((button) => (
+        {LANDING_PAGE_DETAILS.ctaSecondary.map((button, index) => (
           <TouchableOpacity
+            key={"button2" + index}
             // onPress={buttonCallbacks[button.actionType]}
             style={{ marginVertical: 10 }}
           >
@@ -129,7 +136,7 @@ export default function TabOneScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
+    flex: 1,
     alignItems: "center",
     justifyContent: "center",
   },
@@ -142,6 +149,7 @@ const styles = StyleSheet.create({
     // flex: 1,
     height: "100%",
     width: "100%",
+    resizeMode:"contain"
   },
   title: {
     fontSize: 20,
