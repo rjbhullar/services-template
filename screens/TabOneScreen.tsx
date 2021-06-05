@@ -1,24 +1,30 @@
 import * as React from "react";
-import { TouchableOpacity, StyleSheet, Image } from "react-native";
+import {
+  TouchableOpacity,
+  StyleSheet,
+  Image,
+  useWindowDimensions,
+} from "react-native";
 import Swiper from "react-native-swiper";
 import EditScreenInfo from "../components/EditScreenInfo";
-import { Text, View } from "../components/Themed";
+import {  View } from "../components/Themed";
+import { Button, Text } from "react-native-elements";
 const LANDING_PAGE_DETAILS = {
   carousalCards: [
     {
       imageURI: "https://img.youtube.com/vi/AifjAze23lo/0.jpg",
       heading: [
         {
-          color: "red",
+          color: "black",
           text: "HRS Services",
-          fontSize: 50,
+          fontSize: 40,
         },
       ],
       subHeading: [
         {
-          color: "pink",
-          text: "Best Car Services",
-          fontSize: 3,
+          color: "grey",
+          text: "Leave it on us ✌️",
+          fontSize: 23,
         },
       ],
     },
@@ -27,16 +33,16 @@ const LANDING_PAGE_DETAILS = {
         "https://static.billboard.com/files/2020/04/eminem-press-photo-2019-aqu-billboard-1548-1587659998-compressed.jpg",
       heading: [
         {
-          color: "red",
+          color: "black",
           text: "HRS Services",
-          fontSize: 50,
+          fontSize: 40,
         },
       ],
       subHeading: [
         {
-          color: "pink",
+          color: "grey",
           text: "Best Car Services",
-          fontSize: 3,
+          fontSize: 23,
         },
       ],
     },
@@ -44,90 +50,88 @@ const LANDING_PAGE_DETAILS = {
   ctaPrimary: [
     {
       text: "Login",
-      textColor: "black",
-      bgColor: "white",
-      fontSize: 50,
+      textColor: "white",
+      bgColor: "red",
+      fontSize: 25,
       actionType: "signinHandler",
     },
     {
       text: "Signup",
-      textColor: "black",
-      bgColor: "white",
-      fontSize: 50,
+      textColor: "white",
+      bgColor: "red",
+      fontSize: 25,
       actionType: "signupHandler",
     },
   ],
   ctaSecondary: [
     {
       text: "Continue as Guest",
-      textColor: "white",
-      fontSize: 30,
+      textColor: "blue",
+      fontSize: 20,
       actionType: "guestHandlerHandler",
     },
   ],
 };
 export default function TabOneScreen() {
-  let buttonCallbacks = {};
+  const windowWidth = useWindowDimensions().width;
+  const windowHeight = useWindowDimensions().height;
   return (
     <View style={styles.container}>
-      {/* <View style={styles.container}>
-        <Carousel
-          delay={2000}
-          style={{
-            // flex: 1,
-            height: "70%",
-            width: "80%",
-          }}
-          autoplay
-          pageInfo
-          onAnimateNextPage={(p) => console.log(p)}
-        >
-          
-        </Carousel>
-      </View> */}
-      <Swiper style={styles.container} showsButtons={true}>
+      <Swiper style={styles.wrapper} showsPagination={true}>
         {LANDING_PAGE_DETAILS.carousalCards.map((card, index) => (
-          <View
-            key={"card" + index}
-            style={[
-              { height: "100%", width: "100%" },
-            ]}
-          >
+          <View key={"card" + index} style={styles.carousalView}>
             <Image
               source={{ uri: card.imageURI }}
               style={styles.carousalImage}
             />
+            {card.heading.map((heading) => (
+              <Text
+                key={"heading" + index}
+                style={{ fontSize: heading.fontSize, color: heading.color }}
+              >
+                {heading.text}
+              </Text>
+            ))}
+            {card.subHeading.map((subHeading) => (
+              <Text
+                key={"subHeading" + index}
+                style={{
+                  fontSize: subHeading.fontSize,
+                  color: subHeading.color,
+                }}
+              >
+                {subHeading.text}
+              </Text>
+            ))}
           </View>
         ))}
       </Swiper>
-      <View style={styles.container}>
+      <View style={styles.bottomContent}>
         {LANDING_PAGE_DETAILS.ctaPrimary.map((button, index) => (
-          <TouchableOpacity
-            key={"button1" + index}
-            // onPress={buttonCallbacks[button.actionType]}
-            style={{ backgroundColor: button.bgColor, marginVertical: 10 }}
-          >
-            <Text
-              style={{ color: button.textColor, fontSize: button.fontSize }}
-            >
-              {button.text}
-            </Text>
-          </TouchableOpacity>
+          <Button
+            key={"ctaPrimary" + index}
+            containerStyle={{ marginBottom: 10, width: 300, borderRadius: 120 }}
+            buttonStyle={{ backgroundColor: button.bgColor }}
+            title={button.text}
+            titleStyle={{
+              color: button.textColor,
+              fontSize: button.fontSize,
+            }}
+          />
         ))}
       </View>
       <View>
         {LANDING_PAGE_DETAILS.ctaSecondary.map((button, index) => (
-          <TouchableOpacity
-            key={"button2" + index}
-            // onPress={buttonCallbacks[button.actionType]}
-            style={{ marginVertical: 10 }}
-          >
-            <Text
-              style={{ color: button.textColor, fontSize: button.fontSize }}
-            >
-              {button.text}
-            </Text>
-          </TouchableOpacity>
+          <Button
+            key={"ctaSecondary" + index}
+            containerStyle={{ marginVertical: 10 }}
+            type="clear"
+            title={button.text}
+            titleStyle={{
+              color: button.textColor,
+              fontSize: button.fontSize,
+            }}
+          />
         ))}
       </View>
     </View>
@@ -140,16 +144,26 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  bottomContent: {
+    flex: 0.3,
+    alignItems: "center",
+    justifyContent: "center",
+  },
   carousal: {
-    // flex: 1,
-    height: "70%",
+    flex: 0.7,
+    // height: "70%",
     width: "80%",
   },
   carousalImage: {
     // flex: 1,
-    height: "100%",
+    height: "70%",
     width: "100%",
-    resizeMode:"contain"
+    // resizeMode:""
+  },
+  carousalView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
   title: {
     fontSize: 20,
@@ -164,4 +178,32 @@ const styles = StyleSheet.create({
     height: 1,
     width: "80%",
   },
+  wrapper: {
+    // flex:.÷,
+  },
+  slide1: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  slide2: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#97CAE5",
+  },
+  slide3: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#92BBD9",
+  },
+  text: {
+    color: "#fff",
+    fontSize: 30,
+    fontWeight: "bold",
+  },
 });
+
+{
+}
