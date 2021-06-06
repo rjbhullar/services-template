@@ -12,7 +12,7 @@ import { Button, Text } from "react-native-elements";
 const LANDING_PAGE_DETAILS = {
   carousalCards: [
     {
-      imageURI: "https://img.youtube.com/vi/AifjAze23lo/0.jpg",
+      imageURI: "https://media.istockphoto.com/vectors/car-painting-vector-id156891453?b=1&k=6&m=156891453&s=612x612&w=0&h=kPCoQxkMzuhxWzrQrHWfUXC9dcfmOhnP84CYevArOFY=",
       heading: [
         {
           color: "black",
@@ -30,7 +30,7 @@ const LANDING_PAGE_DETAILS = {
     },
     {
       imageURI:
-        "https://static.billboard.com/files/2020/04/eminem-press-photo-2019-aqu-billboard-1548-1587659998-compressed.jpg",
+        "https://graphicriver.img.customer.envatousercontent.com/files/308249461/Business-2872-prw.jpg?auto=compress%2Cformat&q=80&fit=crop&crop=top&max-h=8000&max-w=590&s=3e3065a786e55b612005976c4d701883",
       heading: [
         {
           color: "black",
@@ -51,14 +51,14 @@ const LANDING_PAGE_DETAILS = {
     {
       text: "Login",
       textColor: "white",
-      bgColor: "red",
+      bgColor: "#b31b1b",
       fontSize: 25,
       actionType: "signinHandler",
     },
     {
       text: "Signup",
       textColor: "white",
-      bgColor: "red",
+      bgColor: "#b31b1b",
       fontSize: 25,
       actionType: "signupHandler",
     },
@@ -66,7 +66,7 @@ const LANDING_PAGE_DETAILS = {
   ctaSecondary: [
     {
       text: "Continue as Guest",
-      textColor: "blue",
+      textColor: "#002D62",
       fontSize: 20,
       actionType: "guestHandlerHandler",
     },
@@ -75,13 +75,13 @@ const LANDING_PAGE_DETAILS = {
 export default function LandingPageScreen({ navigation }) {
   const windowWidth = useWindowDimensions().width;
   const windowHeight = useWindowDimensions().height;
-  const signinHandler = ()=>{
+  const signinHandler = () => {
     navigation.navigate("LoginPage");
   }
 
   return (
     <View style={styles.container}>
-      <Swiper style={styles.wrapper} showsPagination={true}>
+      <Swiper showsPagination={true}>
         {LANDING_PAGE_DETAILS.carousalCards.map((card, index) => (
           <View key={"card" + index} style={styles.carousalView}>
             <Image
@@ -91,7 +91,9 @@ export default function LandingPageScreen({ navigation }) {
             {card.heading.map((heading) => (
               <Text
                 key={"heading" + index}
-                style={{ fontSize: heading.fontSize, color: heading.color }}
+                style={{
+                  fontSize: heading.fontSize, color: heading.color, fontFamily: "Roboto"
+                }}
               >
                 {heading.text}
               </Text>
@@ -102,6 +104,7 @@ export default function LandingPageScreen({ navigation }) {
                 style={{
                   fontSize: subHeading.fontSize,
                   color: subHeading.color,
+                  fontFamily: ""
                 }}
               >
                 {subHeading.text}
@@ -111,34 +114,44 @@ export default function LandingPageScreen({ navigation }) {
         ))}
       </Swiper>
       <View style={styles.bottomContent}>
-        {LANDING_PAGE_DETAILS.ctaPrimary.map((button, index) => (
-          <Button
-            key={"ctaPrimary" + index}
-            containerStyle={{ marginBottom: 10, width: 300, borderRadius: 120 }}
-            buttonStyle={{ backgroundColor: button.bgColor }}
-            title={button.text}
-            titleStyle={{
-              color: button.textColor,
-              fontSize: button.fontSize,
-            }}
-            onPress={signinHandler}
-          />
-        ))}
+        <View style={{ flexDirection: "row" }}>
+          {LANDING_PAGE_DETAILS.ctaPrimary.map((button, index) => (
+            <Button
+              key={"ctaPrimary" + index}
+              containerStyle={{ width: 150, margin: 10 }}
+              buttonStyle={{ backgroundColor: button.bgColor }}
+              title={button.text}
+              titleStyle={{
+                color: button.textColor,
+                fontSize: button.fontSize,
+              }}
+              onPress={signinHandler}
+            />
+          ))}
+        </View>
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <View style={{ flex: 1, height: 1, backgroundColor: 'gray' }} />
+          <View>
+            <Text style={{ width: 100, textAlign: 'center' }}>Or</Text>
+          </View>
+          <View style={{ flex: 1, height: 1, backgroundColor: 'gray' }} />
+        </View>
+        <View>
+          {LANDING_PAGE_DETAILS.ctaSecondary.map((button, index) => (
+            <Button
+              key={"ctaSecondary" + index}
+              // containerStyle={{ marginVertica  l: 10 }}
+              type="clear"
+              title={button.text}
+              titleStyle={{
+                color: button.textColor,
+                fontSize: button.fontSize,
+              }}
+            />
+          ))}
+        </View>
       </View>
-      <View>
-        {LANDING_PAGE_DETAILS.ctaSecondary.map((button, index) => (
-          <Button
-            key={"ctaSecondary" + index}
-            containerStyle={{ marginVertical: 10 }}
-            type="clear"
-            title={button.text}
-            titleStyle={{
-              color: button.textColor,
-              fontSize: button.fontSize,
-            }}
-          />
-        ))}
-      </View>
+
     </View>
   );
 }
@@ -148,22 +161,18 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    width: "100%"
   },
   bottomContent: {
-    flex: 0.3,
+    flex: 0.2,
     alignItems: "center",
-    justifyContent: "center",
-  },
-  carousal: {
-    flex: 0.7,
-    // height: "70%",
-    width: "80%",
+    justifyContent: "center"
   },
   carousalImage: {
     // flex: 1,
     height: "70%",
     width: "100%",
-    // resizeMode:""
+    resizeMode: "contain"
   },
   carousalView: {
     flex: 1,
@@ -175,40 +184,9 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginVertical: 30,
   },
-  buttons: {
-    marginVertical: 30,
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: "80%",
-  },
-  wrapper: {
-    // flex:.÷,
-  },
-  slide1: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  slide2: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#97CAE5",
-  },
-  slide3: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#92BBD9",
-  },
   text: {
     color: "#fff",
     fontSize: 30,
     fontWeight: "bold",
   },
 });
-
-{
-}
