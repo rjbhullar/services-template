@@ -7,7 +7,7 @@ import {
 } from "react-native";
 import Swiper from "react-native-swiper";
 import EditScreenInfo from "../components/EditScreenInfo";
-import {  View } from "../components/Themed";
+import { View } from "../components/Themed";
 import { Button, Text } from "react-native-elements";
 const LANDING_PAGE_DETAILS = {
   carousalCards: [
@@ -72,9 +72,13 @@ const LANDING_PAGE_DETAILS = {
     },
   ],
 };
-export default function TabOneScreen() {
+export default function LandingPageScreen({ navigation }) {
   const windowWidth = useWindowDimensions().width;
   const windowHeight = useWindowDimensions().height;
+  const signinHandler = ()=>{
+    navigation.navigate("LoginPage");
+  }
+
   return (
     <View style={styles.container}>
       <Swiper style={styles.wrapper} showsPagination={true}>
@@ -117,6 +121,7 @@ export default function TabOneScreen() {
               color: button.textColor,
               fontSize: button.fontSize,
             }}
+            onPress={signinHandler}
           />
         ))}
       </View>
