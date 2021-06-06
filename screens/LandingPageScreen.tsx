@@ -92,7 +92,8 @@ export default function LandingPageScreen({ navigation }) {
               <Text
                 key={"heading" + index}
                 style={{
-                  fontSize: heading.fontSize, color: heading.color, fontFamily: "Roboto"
+                  fontSize: heading.fontSize, color: heading.color, 
+                  // fontFamily: "Roboto"
                 }}
               >
                 {heading.text}
@@ -104,7 +105,7 @@ export default function LandingPageScreen({ navigation }) {
                 style={{
                   fontSize: subHeading.fontSize,
                   color: subHeading.color,
-                  fontFamily: ""
+                  // fontFamily: ""
                 }}
               >
                 {subHeading.text}
