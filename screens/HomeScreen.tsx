@@ -9,6 +9,7 @@ import Swiper from "react-native-swiper";
 import EditScreenInfo from "../components/EditScreenInfo";
 import { View } from "../components/Themed";
 import { Button, Text } from "react-native-elements";
+import BottomTabNavigator from "../navigation/BottomTabNavigator"
 const LANDING_PAGE_DETAILS = {
   carousalCards: [
     {
@@ -80,81 +81,7 @@ export default function LandingPageScreen({ navigation }) {
   }
 
   return (
-    <View style={styles.container}>
-      <Swiper showsPagination={true}>
-        {LANDING_PAGE_DETAILS.carousalCards.map((card, index) => (
-          <View key={"card" + index} style={styles.carousalView}>
-            <Image
-              source={{ uri: card.imageURI }}
-              style={styles.carousalImage}
-            />
-            {card.heading.map((heading) => (
-              <Text
-                key={"heading" + index}
-                style={{
-                  fontSize: heading.fontSize, color: heading.color, 
-                  // fontFamily: "Roboto"
-                }}
-              >
-                {heading.text}
-              </Text>
-            ))}
-            {card.subHeading.map((subHeading) => (
-              <Text
-                key={"subHeading" + index}
-                style={{
-                  fontSize: subHeading.fontSize,
-                  color: subHeading.color,
-                  // fontFamily: ""
-                }}
-              >
-                {subHeading.text}
-              </Text>
-            ))}
-          </View>
-        ))}
-      </Swiper>
-      <View style={styles.bottomContent}>
-        <View style={{ flexDirection: "row" }}>
-          {LANDING_PAGE_DETAILS.ctaPrimary.map((button, index) => (
-            <Button
-              key={"ctaPrimary" + index}
-              containerStyle={{ width: 150, margin: 10 }}
-              buttonStyle={{ backgroundColor: button.bgColor }}
-              title={button.text}
-              titleStyle={{
-                color: button.textColor,
-                fontSize: button.fontSize,
-              }}
-              onPress={signinHandler}
-            />
-          ))}
-        </View>
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <View style={{ flex: 1, height: 1, backgroundColor: 'gray' }} />
-          <View>
-            <Text style={{ width: 100, textAlign: 'center' }}>Or</Text>
-          </View>
-          <View style={{ flex: 1, height: 1, backgroundColor: 'gray' }} />
-        </View>
-        <View>
-          {LANDING_PAGE_DETAILS.ctaSecondary.map((button, index) => (
-            <Button
-              key={"ctaSecondary" + index}
-              // containerStyle={{ marginVertica  l: 10 }}
-              type="clear"
-              title={button.text}
-              titleStyle={{
-                color: button.textColor,
-                fontSize: button.fontSize,
-              }}
-              onPress={()=>navigation.navigate("HomePage")}
-            />
-          ))}
-        </View>
-      </View>
-
-    </View>
+   <BottomTabNavigator/>
   );
 }
 

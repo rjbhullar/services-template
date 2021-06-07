@@ -12,6 +12,8 @@ import NotFoundScreen from '../screens/NotFoundScreen';
 import LandingPageScreen from "../screens/LandingPageScreen";
 import SignupScreen from "../screens/SignupScreen";
 import LoginScreen from "../screens/LoginScreen";
+import HomeScreen from "../screens/HomeScreen";
+import ProfileScreen from "../screens/ProfileScreen";
 import { RootStackParamList } from '../types';
 import BottomTabNavigator from './BottomTabNavigator';
 import LinkingConfiguration from './LinkingConfiguration';
@@ -36,6 +38,16 @@ function RootNavigator() {
       <Stack.Screen name="LandingPage" component={LandingPageScreen} />
       <Stack.Screen name="LoginPage" component={LoginScreen} />
       <Stack.Screen name="SignupPage" component={SignupScreen} />
+      <Stack.Screen
+        name="HomePage"
+        component={HomeScreen}
+        options={{ title: "Oops!" }}
+      />
+      <Stack.Screen
+        name="ProfilePage"
+        component={ProfileScreen}
+        options={{ title: "Oops!" }}
+      />
       <Stack.Screen
         name="NotFound"
         component={NotFoundScreen}
