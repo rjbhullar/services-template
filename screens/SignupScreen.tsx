@@ -18,7 +18,7 @@ let SIGNUP_FIELDS = [
 ];
 
 const PASSWORD_REGEX =
-    "^(?=.*[A-Za-z])(?=.*d)(?=.*[$@$!%*#?&])[A-Za-zd$@$!%*#?&]{8,}$";
+    /^(?=.*[A-Za-z])(?=.*d)(?=.*[$@$!%*#?&])[A-Za-zd$@$!%*#?&]{8,}$/;
 
 export default function SignupScreen({ navigation }) {
     const navigateToLogin = () => {
