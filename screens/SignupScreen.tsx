@@ -104,7 +104,7 @@ export default function SignupScreen({ navigation }) {
                             ),
                         },
                     }}
-                    submitButtonText="Login"
+                    submitButtonText="Signup"
                     onSubmit={() => {}}
                     afterSubmit={() => {}}
                 />
