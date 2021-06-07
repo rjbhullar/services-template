@@ -4,79 +4,92 @@ import { StyleSheet } from "react-native";
 import EditScreenInfo from "../components/EditScreenInfo";
 import { Input, Button, Text } from "react-native-elements";
 import { View } from "../components/Themed";
-
+import Form from "../components/Form";
+import { isRequired, validateEmailOrMobile } from "./formValidations";
+import { FontAwesome } from "@expo/vector-icons";
 export default function LoginScreen({ navigation }) {
-  const [emailOrMobile, setEmailOrMobile] = React.useState("");
-  console.log('emailOrMobile: ', emailOrMobile);
-  const [password, setPassword] = React.useState("");
-  console.log('password: ', password);
-  
-  const emailOrMobileChanghandler = (value) => {
-    setEmailOrMobile(value);
-  };
+    const [emailOrMobile, setEmailOrMobile] = React.useState("");
+    const [password, setPassword] = React.useState("");
 
-  const passwordChangHandler = (value) => {
-    setPassword(value);
-  };
+    const emailOrMobileChanghandler = (value) => {
+        setEmailOrMobile(value);
+    };
 
-  const navigateToSignup = () => {
-    navigation.navigate("SignupPage");
-  };
+    const passwordChangHandler = (value) => {
+        setPassword(value);
+    };
 
-  let isValidEmailOrMobile = React.useMemo(() => {
+    const navigateToSignup = () => {
+        navigation.navigate("SignupPage");
+    };
 
-  }, [emailOrMobile]);
-
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Logo😊</Text>
-      <Input
-        containerStyle={{ marginBottom: 30, width: "90%" }}
-        placeholder="Email/Mobile"
-        errorStyle={{ color: "red" }}
-        onChangeText={emailOrMobileChanghandler}
-        errorMessage="Enter a valid email or Mobile"
-      />
-      <Input
-        containerStyle={{ marginBottom: 30, width: "90%" }}
-        placeholder="Password"
-        onChangeText={passwordChangHandler}
-        errorStyle={{ color: "red" }}
-        secureTextEntry={true}
-        rightIcon={() => (
-          <Text style={{ color: "grey" }}>Forgot Password?</Text>
-        )}
-      />
-      <Button
-        containerStyle={{ marginBottom: 10, width: 200, borderRadius: 120 }}
-        disabled={!(emailOrMobile && password)}
-        title="Signin"
-        onPress={() => null}
-      />
-      <Button
-        containerStyle={{ marginVertical: 10 }}
-        type="clear"
-        title="Not a Member? Signup"
-        onPress={navigateToSignup}
-      />
-    </View>
-  );
+    return (
+        <View style={styles.container}>
+            <Text style={styles.title}>Logo😊</Text>
+            <Form
+                containerStyle={{ marginBottom: 30, width: "90%" }}
+                fields={{
+                    email: {
+                        label: "Email/Mobile",
+                        validators: [isRequired, validateEmailOrMobile],
+                        leftIcon: () => (
+                            <FontAwesome
+                                name="user"
+                                size={20}
+                                color="grey"
+                                style={{ marginRight: 10 }}
+                            />
+                        ),
+                    },
+                    password: {
+                        label: "Password",
+                        validators: [isRequired],
+                        leftIcon: () => (
+                            <FontAwesome
+                                name="key"
+                                size={20}
+                                color="grey"
+                                style={{ marginRight: 10 }}
+                            />
+                        ),
+                        rightIcon: () => (
+                            <Text style={{ color: "grey" }}>
+                                Forgot Password?
+                            </Text>
+                        ),
+                        inputProps: {
+                            secureTextEntry: true,
+                        },
+                    },
+                }}
+                submitButtonText="Login"
+                onSubmit={() => {}}
+                afterSubmit={() => {}}
+            />
+            <Button
+                containerStyle={{ marginVertical: 10 }}
+                type="clear"
+                title="Not a Member? Signup"
+                onPress={navigateToSignup}
+            />
+        </View>
+    );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  title: {
-    marginBottom: 100,
-    fontSize: 30,
-    fontWeight: "bold",
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: "80%",
-  },
+    container: {
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center",
+    },
+    title: {
+        marginBottom: 100,
+        fontSize: 30,
+        fontWeight: "bold",
+    },
+    separator: {
+        marginVertical: 30,
+        height: 1,
+        width: "80%",
+    },
 });
