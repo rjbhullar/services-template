@@ -1,7 +1,6 @@
-export const isRequired = (value) => {
-    console.log('value: ', value);
+export const isRequired = (fieldName) => (value) => {
   if (!value) {
-    return "Required Field";
+    return `${fieldName} is required`;
   }
 };
 
@@ -17,7 +16,13 @@ export const validateEmail = (value) => {
 export const validateMobile = (value) => {
   let isInvalidValue = value != Number(value) || value.length !== 10;
   if (isInvalidValue) {
-    return `Invalid Email`;
+    return `Invalid Mobile Number`;
+  }
+};
+
+export const validateRegex = (regex) => (value) => {
+  if (!regex.test(value)) {
+      return `Invalid Format Provided`;
   }
 };
 

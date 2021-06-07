@@ -1,5 +1,5 @@
 import * as React from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, ImageBackground } from "react-native";
 
 import EditScreenInfo from "../components/EditScreenInfo";
 import { Input, Button, Text } from "react-native-elements";
@@ -8,30 +8,26 @@ import Form from "../components/Form";
 import { isRequired, validateEmailOrMobile } from "./formValidations";
 import { FontAwesome } from "@expo/vector-icons";
 export default function LoginScreen({ navigation }) {
-    const [emailOrMobile, setEmailOrMobile] = React.useState("");
-    const [password, setPassword] = React.useState("");
-
-    const emailOrMobileChanghandler = (value) => {
-        setEmailOrMobile(value);
-    };
-
-    const passwordChangHandler = (value) => {
-        setPassword(value);
-    };
 
     const navigateToSignup = () => {
         navigation.navigate("SignupPage");
     };
 
     return (
-        <View style={styles.container}>
+      <ImageBackground
+      source={{ uri: "https://i.pinimg.com/originals/db/ef/d2/dbefd2a0ddf098a50427d6af39ae342f.jpg" }}
+      style={{
+        flex: 1, transform: [{ scaleX: -1 }]
+      }}
+    >
+        <View  style={[styles.container, { transform: [{ scaleX: -1 }] }]}>
             <Text style={styles.title}>Logo😊</Text>
             <Form
-                containerStyle={{ marginBottom: 30, width: "90%" }}
+                // containerStyle={{ marginBottom: 30, width: "90%" }}
                 fields={{
                     email: {
                         label: "Email/Mobile",
-                        validators: [isRequired, validateEmailOrMobile],
+                        validators: [isRequired("Email/Mobile"), validateEmailOrMobile],
                         leftIcon: () => (
                             <FontAwesome
                                 name="user"
@@ -43,7 +39,7 @@ export default function LoginScreen({ navigation }) {
                     },
                     password: {
                         label: "Password",
-                        validators: [isRequired],
+                        validators: [isRequired("Password")],
                         leftIcon: () => (
                             <FontAwesome
                                 name="key"
@@ -73,6 +69,7 @@ export default function LoginScreen({ navigation }) {
                 onPress={navigateToSignup}
             />
         </View>
+    </ImageBackground>
     );
 }
 

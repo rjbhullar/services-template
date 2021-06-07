@@ -1,9 +1,11 @@
 import * as React from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, ImageBackground } from "react-native";
+import { isRequired, validateEmail, validateMobile, validateRegex } from "./formValidations";
+import { FontAwesome, Entypo, Ionicons, MaterialIcons } from "@expo/vector-icons";
 
-import EditScreenInfo from "../components/EditScreenInfo";
 import { Input, Button, Text } from "react-native-elements";
 import { View } from "../components/Themed";
+import Form from "../components/Form";
 
 let SIGNUP_FIELDS = [
     {
@@ -15,56 +17,105 @@ let SIGNUP_FIELDS = [
     },
 ];
 
+const PASSWORD_REGEX =
+    "^(?=.*[A-Za-z])(?=.*d)(?=.*[$@$!%*#?&])[A-Za-zd$@$!%*#?&]{8,}$";
+
 export default function SignupScreen({ navigation }) {
     const navigateToLogin = () => {
         navigation.navigate("LoginPage");
     };
 
     return (
-        <View style={styles.container}>
-            <Text style={styles.title}>Logo😊</Text>
-            <Input
-                containerStyle={{ marginBottom: 30, width: "90%" }}
-                placeholder="Name"
-                errorStyle={{ color: "red" }}
-                errorMessage=""
-            />
-            <Input
-                containerStyle={{ marginBottom: 30, width: "90%" }}
-                placeholder="Email"
-                errorStyle={{ color: "red" }}
-                errorMessage=""
-            />
-            <Input
-                containerStyle={{ marginBottom: 30, width: "90%" }}
-                placeholder="Mobile"
-            />
-            <Input
-                containerStyle={{ marginBottom: 30, width: "90%" }}
-                placeholder="Password"
-                errorStyle={{ color: "red" }}
-            />
-            <Input
-                containerStyle={{ marginBottom: 30, width: "90%" }}
-                placeholder="Confirm Password"
-                errorStyle={{ color: "red" }}
-            />
-            <Button
-                containerStyle={{
-                    marginBottom: 10,
-                    width: 200,
-                    borderRadius: 120,
-                }}
-                title="Signup"
-                onPress={() => null}
-            />
-            <Button
-                containerStyle={{ marginVertical: 10 }}
-                type="clear"
-                title="Already a Member? Signin"
-                onPress={navigateToLogin}
-            />
-        </View>
+        <ImageBackground
+            source={{
+                uri: "https://i.pinimg.com/originals/db/ef/d2/dbefd2a0ddf098a50427d6af39ae342f.jpg",
+            }}
+            style={{ flex: 1 }}
+        >
+            <View style={styles.container}>
+                <Text style={styles.title}>Logo😊</Text>
+                <Form
+                    // containerStyle={{ marginBottom: 30, width: "90%" }}
+                    fields={{
+                        name: {
+                            label: "Name",
+                            validators: [isRequired("Name")],
+                            leftIcon: () => (
+                                <FontAwesome
+                                    name="user"
+                                    size={20}
+                                    color="grey"
+                                    style={{ marginRight: 10 }}
+                                />
+                            ),
+                        },
+                        email: {
+                            label: "Email",
+                            validators: [isRequired("Email"), validateEmail],
+                            leftIcon: () => (
+                                <Entypo
+                                    name="email"
+                                    size={20}
+                                    color="grey"
+                                    style={{ marginRight: 10 }}
+                                />
+                            ),
+                        },
+                        mobile: {
+                            label: "Mobile",
+                            validators: [isRequired("Mobile"), validateMobile],
+                            leftIcon: () => (
+                                <Ionicons
+                                    name="call"
+                                    size={20}
+                                    color="grey"
+                                    style={{ marginRight: 10 }}
+                                />
+                            ),
+                        },
+                        password: {
+                            label: "Password",
+                            validators: [
+                                isRequired("Password"),
+                                validateRegex(PASSWORD_REGEX),
+                            ],
+                            leftIcon: () => (
+                                <FontAwesome
+                                    name="key"
+                                    size={20}
+                                    color="grey"
+                                    style={{ marginRight: 10 }}
+                                />
+                            ),
+                            inputProps: {
+                                secureTextEntry: true,
+                            },
+                        },
+                        confirmPassword: {
+                            label: "Confirm Password",
+                            validators: [isRequired("Confirm Password")],
+                            leftIcon: () => (
+                                <MaterialIcons
+                                    name="security"
+                                    size={20}
+                                    color="grey"
+                                    style={{ marginRight: 10 }}
+                                />
+                            ),
+                        },
+                    }}
+                    submitButtonText="Login"
+                    onSubmit={() => {}}
+                    afterSubmit={() => {}}
+                />
+                <Button
+                    containerStyle={{ marginVertical: 10 }}
+                    type="clear"
+                    title="Already a Member? Signin"
+                    onPress={navigateToLogin}
+                />
+            </View>
+        </ImageBackground>
     );
 }
 
@@ -73,15 +124,16 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: "center",
         justifyContent: "center",
-        paddingHorizontal: 50,
+        opacity: 0.8,
     },
     title: {
         marginBottom: 100,
         fontSize: 30,
         fontWeight: "bold",
     },
-    textBox: {
+    separator: {
         marginVertical: 30,
-        width: "90%",
+        height: 1,
+        width: "80%",
     },
 });

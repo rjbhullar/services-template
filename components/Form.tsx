@@ -36,7 +36,7 @@ const Form = ({
     submitButtonText,
     onSubmit,
     afterSubmit,
-    containerStyle,
+    containerStyle= {},
     isAsync = true,
 }) => {
     const fieldKeys = React.useMemo(() => Object.keys(fields), [fields]);
@@ -73,7 +73,6 @@ const Form = ({
             setState({ validationErrors });
             return;
         }
-        console.log("oasdeded");
         if (isAsync) {
             setState({
                 isSubmitting: true
@@ -89,7 +88,9 @@ const Form = ({
 
     const { values, validationErrors } = state;
     return (
-        <CenteredView >
+        <CenteredView
+            style={containerStyle}
+        >
             {fieldKeys.map((key) => {
                 const field = fields[key];
                 const fieldValue = values[key];
@@ -112,7 +113,7 @@ const Form = ({
                             }
                         /> */}
                         <Input
-                            containerStyle={{ marginBottom: 30, width: "100%" }}
+                            containerStyle={{ marginBottom: 10, width: "100%" }}
                             placeholder={field.label}
                             value={fieldValue}
                             onChangeText={(text) => onChangeValue(key, text)}
