@@ -1,5 +1,5 @@
-import { isLoaded } from "expo-font";
-import * as React from "react";
+import {isLoaded} from 'expo-font'
+import * as React from 'react'
 
 import {
     View,
@@ -7,75 +7,75 @@ import {
     TextInput,
     Text,
     ActivityIndicator,
-    StyleSheet
-} from "react-native";
-import { Input, Button } from "react-native-elements";
-import Animated from "react-native-reanimated";
-import { validateField, validateFields } from "../screens/formValidations";
-import CenteredView from "./CenteredView";
+    StyleSheet,
+} from 'react-native'
+import {ThemeProvider, Input, Button} from 'react-native-elements'
+import Animated from 'react-native-reanimated'
+import {validateField, validateFields} from '../screens/formValidations'
+import CenteredView from './CenteredView'
 
 const getInitialState = (fieldKeys) => {
-    const values = {};
+    const values = {}
 
     fieldKeys.forEach((key) => {
-        values[key] = "";
-    });
+        values[key] = ''
+    })
 
-    return values;
-};
+    return values
+}
 
 const stateReducer = (state, action) => {
-    if (typeof action === "function") {
-        return { ...state, ...action(state) };
+    if (typeof action === 'function') {
+        return {...state, ...action(state)}
     }
-    return { ...state, ...action };
-};
+    return {...state, ...action}
+}
 
 const Form = ({
     fields,
     submitButtonText,
     onSubmit,
     afterSubmit,
-    containerStyle= {},
+    containerStyle = {},
     isAsync = true,
 }) => {
-    const fieldKeys = React.useMemo(() => Object.keys(fields), [fields]);
+    const fieldKeys = React.useMemo(() => Object.keys(fields), [fields])
     const [state, setState] = React.useReducer(stateReducer, {}, () => {
-        let blankValues = getInitialState(fieldKeys);
+        let blankValues = getInitialState(fieldKeys)
         return {
             values: blankValues,
             validationErrors: blankValues,
-        };
-    });
+        }
+    })
 
     const onChangeValue = (key, value) => {
         setState((prevState) => ({
-            values: { ...prevState.values, [key]: value },
-            validationErrors: { ...prevState.validationErrors, [key]: "" },
-        }));
-    };
+            values: {...prevState.values, [key]: value},
+            validationErrors: {...prevState.validationErrors, [key]: ''},
+        }))
+    }
 
-    const validateFieldOnBlur = (key, { validators }, fieldValue) => {
-        let error = validateField(validators, fieldValue);
+    const validateFieldOnBlur = (key, {validators}, fieldValue) => {
+        let error = validateField(validators, fieldValue)
         setState((prevState) => ({
-            validationErrors: { ...prevState.validationErrors, [key]: error },
-        }));
-    };
+            validationErrors: {...prevState.validationErrors, [key]: error},
+        }))
+    }
 
     const submitForm = async () => {
         const validationErrors = validateFields({
             fields,
             fieldKeys,
             values: state.values,
-        });
-        console.log('validationErrors: ', validationErrors);
+        })
+        console.log('validationErrors: ', validationErrors)
         if (validationErrors) {
-            setState({ validationErrors });
-            return;
+            setState({validationErrors})
+            return
         }
         if (isAsync) {
             setState({
-                isSubmitting: true
+                isSubmitting: true,
             })
             // try {
             //     const result = await onSubmit(...values);
@@ -84,19 +84,17 @@ const Form = ({
             //     console.log("error:", e);
             // }
         }
-    };
+    }
 
-    const { values, validationErrors } = state;
+    const {values, validationErrors} = state
     return (
-        <CenteredView
-            style={containerStyle}
-        >
+        <CenteredView style={containerStyle}>
             {fieldKeys.map((key) => {
-                const field = fields[key];
-                const fieldValue = values[key];
-                const fieldError = validationErrors[key];
+                const field = fields[key]
+                const fieldValue = values[key]
+                const fieldError = validationErrors[key]
                 return (
-                    <CenteredView key={key} style={{ padding: 10 }}>
+                    <CenteredView key={key} style={{padding: 10}}>
                         {/* <Text>{field.label}</Text> */}
                         {/* <TextInput
                             {...field.inputProps}
@@ -113,18 +111,22 @@ const Form = ({
                             }
                         /> */}
                         <Input
-                            containerStyle={{ marginBottom: 10, width: "100%" }}
+                            containerStyle={{
+                                marginBottom: 10,
+                                width: '100%',
+                            }}
                             placeholder={field.label}
                             value={fieldValue}
                             onChangeText={(text) => onChangeValue(key, text)}
-                            errorStyle={{ color: "red" }}
+                            errorStyle={{color: 'red'}}
                             {...field.inputProps}
                             rightIcon={field.rightIcon && field.rightIcon()}
                             leftIcon={field.leftIcon && field.leftIcon()}
                             errorMessage={fieldError}
+                            autoCapitalize={false}
                         />
                     </CenteredView>
-                );
+                )
             })}
             <Button
                 containerStyle={styles.submitButton}
@@ -135,24 +137,23 @@ const Form = ({
                     state.isSubmitting && (
                         <ActivityIndicator
                             color="#FFFFFF"
-                            style={{ paddingRight: 10 }}
+                            style={{paddingRight: 10}}
                         />
                     )
                 }
                 raised
             />
         </CenteredView>
-    );
-};
-
+    )
+}
 
 const styles = StyleSheet.create({
     submitButton: {
         marginVertical: 10,
         width: 200,
         borderRadius: 120,
-        backgroundColor: "red"
+        backgroundColor: '#b31b1b',
     },
-});
+})
 
-export default Form;
+export default Form
