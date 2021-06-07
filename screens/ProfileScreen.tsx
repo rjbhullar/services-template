@@ -1,7 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
-import { StyleSheet, View, Image, Text ,useWindowDimensions} from 'react-native';
+import { StyleSheet, View, Image, Text, useWindowDimensions } from 'react-native';
 import { RectButton, ScrollView } from 'react-native-gesture-handler';
 
 function TabBarIcon(props: { name: React.ComponentProps<typeof Ionicons>['name']; color: string }) {
@@ -15,20 +15,27 @@ export default function LinksScreen() {
         <View style={[styles.container]} >
             <View style={styles.welcomeContainer}>
                 <View style={[styles.leftSection]}>
-                    <Image
-                        source={{ uri: "https://origin.go.gq.com.au/wp-content/uploads/2020/01/eminem-godzilla.jpg" }}
-                        style={[styles.welcomeImage,{borderRadius: 1000}]}
-                    />
+                    <View style={{
+                        borderRadius: 1000,
+                        borderWidth: 2,
+                        padding: 2,
+                        width: 130
+                    }}>
+                        <Image
+                            source={{ uri: "https://origin.go.gq.com.au/wp-content/uploads/2020/01/eminem-godzilla.jpg" }}
+                            style={[styles.welcomeImage, { borderRadius: 1000 }]}
+                        />
+                    </View>
                 </View>
                 <View style={styles.rightSection}>
                     <View>
-                        <Text style={{fontWeight:'bold'}}>
+                        <Text style={{ fontWeight: 'bold' }}>
                             Mukul Saini
                         </Text>
-                        <Text style={{color:'gray'}}>
+                        <Text style={{ color: 'gray' }}>
                             mukulsaini95@gmail.com
                         </Text>
-                        <Text style={{fontWeight:"600"}}>
+                        <Text style={{ fontWeight: "600" }}>
                             8802192265
                         </Text>
                     </View>
@@ -75,9 +82,8 @@ const styles = StyleSheet.create({
     },
     leftSection: {
         flex: .4,
-        alignItems: "center",
-        justifyContent:"center",
-        borderRadius: 1000
+        // alignItems: "center",
+        // justifyContent:"center",
     },
     rightSection: {
         flex: .6,
@@ -86,7 +92,7 @@ const styles = StyleSheet.create({
     welcomeContainer: {
         alignItems: 'center',
         flex: 1,
-        flexDirection: "row"
+        flexDirection: "row",
     },
     welcomeImage: {
         width: 120,
