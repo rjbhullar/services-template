@@ -78,6 +78,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: "center",
         justifyContent: "center",
+        opacity:.8
     },
     title: {
         marginBottom: 100,

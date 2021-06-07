@@ -124,7 +124,7 @@ export default function LandingPageScreen({ navigation }) {
                   {LANDING_PAGE_DETAILS.ctaPrimary.map((button, index) => (
                       <Button
                           key={"ctaPrimary" + index}
-                          containerStyle={{ width: 150, margin: 10 }}
+                          containerStyle={{ width: 150, margin: 10 ,borderRadius:1000}}
                           buttonStyle={{ backgroundColor: button.bgColor }}
                           title={button.text}
                           titleStyle={{
