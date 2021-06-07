@@ -48,7 +48,7 @@ export default function SignupScreen({navigation}) {
                                 <FontAwesome
                                     name="user"
                                     size={20}
-                                    color="grey"
+                                    color="#b31b1b"
                                     style={{marginRight: 10}}
                                 />
                             ),
@@ -60,7 +60,7 @@ export default function SignupScreen({navigation}) {
                                 <Entypo
                                     name="email"
                                     size={20}
-                                    color="grey"
+                                    color="#b31b1b"
                                     style={{marginRight: 10}}
                                 />
                             ),
@@ -72,7 +72,7 @@ export default function SignupScreen({navigation}) {
                                 <Ionicons
                                     name="call"
                                     size={20}
-                                    color="grey"
+                                    color="#b31b1b"
                                     style={{marginRight: 10}}
                                 />
                             ),
@@ -87,7 +87,7 @@ export default function SignupScreen({navigation}) {
                                 <FontAwesome
                                     name="key"
                                     size={20}
-                                    color="grey"
+                                    color="#b31b1b"
                                     style={{marginRight: 10}}
                                 />
                             ),
@@ -102,7 +102,7 @@ export default function SignupScreen({navigation}) {
                                 <MaterialIcons
                                     name="security"
                                     size={20}
-                                    color="grey"
+                                    color="#b31b1b"
                                     style={{marginRight: 10}}
                                 />
                             ),

@@ -36,7 +36,7 @@ export default function LoginScreen({navigation}) {
                                 <FontAwesome
                                     name="user"
                                     size={20}
-                                    color="grey"
+                                    color="#b31b1b"
                                     style={{marginRight: 10}}
                                 />
                             ),
@@ -48,7 +48,7 @@ export default function LoginScreen({navigation}) {
                                 <FontAwesome
                                     name="key"
                                     size={20}
-                                    color="grey"
+                                    color="#b31b1b"
                                     style={{marginRight: 10}}
                                 />
                             ),
