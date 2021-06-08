@@ -11,6 +11,7 @@ import {FontAwesome, Entypo, Ionicons, MaterialIcons} from '@expo/vector-icons'
 import {Input, Button, Text} from 'react-native-elements'
 import {View} from '../components/Themed'
 import Form from '../components/Form'
+import ClearButton from '../components/ClearButton'
 
 let SIGNUP_FIELDS = [
     {
@@ -52,6 +53,9 @@ export default function SignupScreen({navigation}) {
                                     style={{marginRight: 10}}
                                 />
                             ),
+                            inputProps: {
+                                autoCapitalize :'words',
+                            },
                         },
                         email: {
                             label: 'Email',
@@ -112,15 +116,7 @@ export default function SignupScreen({navigation}) {
                     onSubmit={() => {}}
                     afterSubmit={() => {}}
                 />
-                <Button
-                    containerStyle={{marginVertical: 10}}
-                    buttonStyle={{
-                        backgroundColor: '#fff',
-                    }}
-                    titleStyle={{
-                        color: '#b31b1b',
-                    }}
-                    type="clear"
+                <ClearButton
                     title="Already a Member? Signin"
                     onPress={navigateToLogin}
                 />

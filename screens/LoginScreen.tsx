@@ -7,6 +7,7 @@ import {View} from '../components/Themed'
 import Form from '../components/Form'
 import {isRequired, validateEmailOrMobile} from './formValidations'
 import {FontAwesome} from '@expo/vector-icons'
+import ClearButton from '../components/ClearButton'
 export default function LoginScreen({navigation}) {
     const navigateToSignup = () => {
         navigation.navigate('SignupPage')
@@ -66,15 +67,7 @@ export default function LoginScreen({navigation}) {
                     onSubmit={() => {}}
                     afterSubmit={() => {}}
                 />
-                <Button
-                    containerStyle={{marginVertical: 10}}
-                    buttonStyle={{
-                        backgroundColor: '#fff',
-                    }}
-                    titleStyle={{
-                        color: '#b31b1b',
-                    }}
-                    type="clear"
+                <ClearButton
                     title="Not a Member? Signup"
                     onPress={navigateToSignup}
                 />

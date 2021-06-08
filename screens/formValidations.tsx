@@ -8,7 +8,6 @@ export const validateEmail = (value) => {
   let emailRegex =
     /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
   if (!emailRegex.test(value)) {
-      console.log("nuks email");
     return `Invalid Email`;
   }
 };

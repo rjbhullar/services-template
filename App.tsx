@@ -16,6 +16,9 @@ const theme = {
         buttonStyle: {
             backgroundColor: '#b31b1b',
         },
+        containerStyle: {
+            marginVertical: 10,
+        },
     },
 }
 

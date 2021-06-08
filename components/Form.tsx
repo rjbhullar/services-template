@@ -68,7 +68,6 @@ const Form = ({
             fieldKeys,
             values: state.values,
         })
-        console.log('validationErrors: ', validationErrors)
         if (validationErrors) {
             setState({validationErrors})
             return
@@ -119,11 +118,11 @@ const Form = ({
                             value={fieldValue}
                             onChangeText={(text) => onChangeValue(key, text)}
                             errorStyle={{color: 'red'}}
-                            {...field.inputProps}
                             rightIcon={field.rightIcon && field.rightIcon()}
                             leftIcon={field.leftIcon && field.leftIcon()}
                             errorMessage={fieldError}
-                            autoCapitalize={false}
+                            autoCapitalize="none"
+                            {...field.inputProps}
                         />
                     </CenteredView>
                 )
@@ -149,10 +148,8 @@ const Form = ({
 
 const styles = StyleSheet.create({
     submitButton: {
-        marginVertical: 10,
         width: 200,
         borderRadius: 120,
-        backgroundColor: '#b31b1b',
     },
 })
 
