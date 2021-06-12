@@ -143,7 +143,7 @@ export default function LandingPageScreen({navigation}) {
                     />
                     <View>
                         <Text style={{width: 100, textAlign: 'center'}}>
-                            Or
+                            OR
                         </Text>
                     </View>
                     <View

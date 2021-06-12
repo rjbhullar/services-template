@@ -45,41 +45,30 @@ export default function SignupScreen({navigation}) {
                         name: {
                             label: 'Name',
                             validators: [isRequired('Name')],
-                            leftIcon: () => (
-                                <FontAwesome
-                                    name="user"
-                                    size={20}
-                                    color="#b31b1b"
-                                    style={{marginRight: 10}}
-                                />
-                            ),
+                            leftIcon: {
+                                family: 'FontAwesome',
+                                name: 'user',
+                            },
                             inputProps: {
-                                autoCapitalize :'words',
+                                autoCapitalize: 'words',
+                                name: 'user',
                             },
                         },
                         email: {
                             label: 'Email',
                             validators: [isRequired('Email'), validateEmail],
-                            leftIcon: () => (
-                                <Entypo
-                                    name="email"
-                                    size={20}
-                                    color="#b31b1b"
-                                    style={{marginRight: 10}}
-                                />
-                            ),
+                            leftIcon: {
+                                family: 'Entypo',
+                                name: 'email',
+                            },
                         },
                         mobile: {
                             label: 'Mobile',
                             validators: [isRequired('Mobile'), validateMobile],
-                            leftIcon: () => (
-                                <Ionicons
-                                    name="call"
-                                    size={20}
-                                    color="#b31b1b"
-                                    style={{marginRight: 10}}
-                                />
-                            ),
+                            leftIcon: {
+                                family: 'Ionicons',
+                                name: 'call',
+                            },
                         },
                         password: {
                             label: 'Password',
@@ -87,14 +76,10 @@ export default function SignupScreen({navigation}) {
                                 isRequired('Password'),
                                 validateRegex(PASSWORD_REGEX),
                             ],
-                            leftIcon: () => (
-                                <FontAwesome
-                                    name="key"
-                                    size={20}
-                                    color="#b31b1b"
-                                    style={{marginRight: 10}}
-                                />
-                            ),
+                            leftIcon: {
+                                family: 'FontAwesome',
+                                name: 'key',
+                            },
                             inputProps: {
                                 secureTextEntry: true,
                             },
@@ -102,14 +87,10 @@ export default function SignupScreen({navigation}) {
                         confirmPassword: {
                             label: 'Confirm Password',
                             validators: [isRequired('Confirm Password')],
-                            leftIcon: () => (
-                                <MaterialIcons
-                                    name="security"
-                                    size={20}
-                                    color="#b31b1b"
-                                    style={{marginRight: 10}}
-                                />
-                            ),
+                            leftIcon: {
+                                family: 'MaterialIcons',
+                                name: 'security',
+                            },
                         },
                     }}
                     submitButtonText="Signup"

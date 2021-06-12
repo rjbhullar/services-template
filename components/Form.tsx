@@ -13,7 +13,19 @@ import {ThemeProvider, Input, Button} from 'react-native-elements'
 import Animated from 'react-native-reanimated'
 import {validateField, validateFields} from '../screens/formValidations'
 import CenteredView from './CenteredView'
+import {FontAwesome, Entypo, Ionicons, MaterialIcons} from '@expo/vector-icons'
 
+let icons = {FontAwesome, Entypo, Ionicons, MaterialIcons}
+const iconCommonProps = {
+    size: 20,
+    color: '#b31b1b',
+    style: {marginRight: 10},
+}
+
+const getIcon = (iconDetails) => {
+    const Icon = icons[iconDetails.family]
+    return <Icon {...iconCommonProps} {...iconDetails} />
+}
 const getInitialState = (fieldKeys) => {
     const values = {}
 
@@ -119,7 +131,12 @@ const Form = ({
                             onChangeText={(text) => onChangeValue(key, text)}
                             errorStyle={{color: 'red'}}
                             rightIcon={field.rightIcon && field.rightIcon()}
-                            leftIcon={field.leftIcon && field.leftIcon()}
+                            leftIcon={
+                                typeof field.leftIcon &&
+                                (field.leftIcon === 'function'
+                                    ? field.leftIcon()
+                                    : getIcon(field.leftIcon))
+                            }
                             errorMessage={fieldError}
                             autoCapitalize="none"
                             {...field.inputProps}

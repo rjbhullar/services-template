@@ -33,26 +33,18 @@ export default function LoginScreen({navigation}) {
                                 isRequired('Email/Mobile'),
                                 validateEmailOrMobile,
                             ],
-                            leftIcon: () => (
-                                <FontAwesome
-                                    name="user"
-                                    size={20}
-                                    color="#b31b1b"
-                                    style={{marginRight: 10}}
-                                />
-                            ),
+                            leftIcon: {
+                                family: 'FontAwesome',
+                                name: 'user',
+                            },
                         },
                         password: {
                             label: 'Password',
                             validators: [isRequired('Password')],
-                            leftIcon: () => (
-                                <FontAwesome
-                                    name="key"
-                                    size={20}
-                                    color="#b31b1b"
-                                    style={{marginRight: 10}}
-                                />
-                            ),
+                            leftIcon: {
+                                family: 'FontAwesome',
+                                name: 'key',
+                            },
                             rightIcon: () => (
                                 <Text style={{color: 'grey'}}>
                                     Forgot Password?
