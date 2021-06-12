@@ -1,4 +1,10 @@
-import {Ionicons, Entypo, FontAwesome} from '@expo/vector-icons'
+import {
+    Ionicons,
+    Entypo,
+    FontAwesome,
+    AntDesign,
+    MaterialIcons,
+} from '@expo/vector-icons'
 import * as WebBrowser from 'expo-web-browser'
 import * as React from 'react'
 import {StyleSheet, View, Image, Text, useWindowDimensions} from 'react-native'
@@ -24,6 +30,7 @@ export default function LinksScreen() {
                             borderWidth: 2,
                             padding: 2,
                             width: 130,
+                            borderColor: 'gray',
                         }}>
                         <Image
                             source={{
@@ -34,64 +41,158 @@ export default function LinksScreen() {
                     </View>
                 </View>
                 <View style={styles.rightSection}>
-                    <View>
-                        <Text style={{fontWeight: 'bold'}}>
-                            <FontAwesome
-                                name="user"
-                                size={20}
-                                style={{paddingLeft: 10}}
-                            />
+                    <View
+                        style={{
+                            flexDirection: 'row',
+                            padding: 5,
+                        }}>
+                        <FontAwesome name="user" size={25} color="#b31b1b" />
+                        <Text
+                            style={{
+                                fontWeight: 'bold',
+                                margin: 5,
+                                width: '100%',
+                            }}>
                             Mukul Saini
                         </Text>
-                        <Text style={{color: 'gray'}}>
-                            <Entypo
-                                name="email"
-                                size={20}
-                                color="black"
-                                style={{marginRight: 10}}
-                            />
+                    </View>
+                    <View style={{flexDirection: 'row', padding: 5}}>
+                        <Entypo name="email" size={20} color="#b31b1b" />
+                        <Text
+                            style={{
+                                fontWeight: 'bold',
+                                margin: 5,
+                                width: '100%',
+                            }}>
                             mukulsaini95@gmail.com
                         </Text>
-                        <Text style={{fontWeight: '600'}}>
-                            <Ionicons
-                                name="call"
-                                size={20}
-                                style={{marginRight: 10}}
-                            />
+                    </View>
+                    <View style={{flexDirection: 'row', padding: 5}}>
+                        <Ionicons name="call" size={20} color="#b31b1b" />
+                        <Text
+                            style={{
+                                fontWeight: '600',
+                                margin: 5,
+                            }}>
                             8802192265
                         </Text>
                     </View>
                 </View>
             </View>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <View style={{flex: 1, height: 1, backgroundColor: 'gray'}} />
+            </View>
             <View
                 style={{
-                    justifyContent: 'space-between',
+                    justifyContent: 'space-evenly',
                     flex: 1,
-                    paddingLeft: 10,
                 }}>
-                <Text style={{fontSize: 25, marginTop: 20}}>
-                    <TabBarIcon color="red" name="wallet" /> My Wallet
-                </Text>
-                {/* <Divider /> */}
-                <Text style={{fontSize: 25, marginTop: 20}}>
-                    <TabBarIcon color="red" name="history" /> Game History
-                </Text>
-                {/* <Divider /> */}
-                <Text style={{fontSize: 25, marginTop: 20}}>
-                    <TabBarIcon color="red" name="user-secret" /> Privacy
-                </Text>
-                {/* <Divider /> */}
-                <Text style={{fontSize: 25, marginTop: 20}}>
-                    <TabBarIcon color="red" name="cog" /> Settings
-                </Text>
-                <View style={{marginVertical: 30}}>
+                <View
+                    style={{
+                        flexDirection: 'row',
+                        paddingHorizontal: 20,
+                        // paddingVertical: 10,
+                        alignItems: 'center',
+                    }}>
+                    <AntDesign name="profile" size={30} color="#2f95dc" />
                     <Text
                         style={{
-                            fontSize: 30,
-                            color: 'red',
-                            alignSelf: 'center',
+                            marginHorizontal: 20,
+                            fontSize: 20,
+                            width: '100%',
+                            fontWeight: '500',
                         }}>
-                        {' '}
+                        My Profile
+                    </Text>
+                </View>
+                <View
+                    style={{
+                        flexDirection: 'row',
+                        paddingHorizontal: 20,
+                        alignItems: 'center',
+                    }}>
+                    <MaterialIcons name="feedback" size={30} color="#2f95dc" />
+                    <Text
+                        style={{
+                            marginHorizontal: 20,
+                            fontSize: 20,
+                            width: '100%',
+                            fontWeight: '500',
+                        }}>
+                        Feedback
+                    </Text>
+                </View>
+                <View
+                    style={{
+                        flexDirection: 'row',
+                        paddingHorizontal: 20,
+                        alignItems: 'center',
+                    }}>
+                    <Entypo name="help-with-circle" size={30} color="#2f95dc" />
+                    <Text
+                        style={{
+                            marginHorizontal: 20,
+                            fontSize: 20,
+                            width: '100%',
+                            fontWeight: '500',
+                        }}>
+                        Help and Support
+                    </Text>
+                </View>
+                <View
+                    style={{
+                        flexDirection: 'row',
+                        paddingHorizontal: 20,
+                        alignItems: 'center',
+                    }}>
+                    <AntDesign name="sharealt" size={30} color="#2f95dc" />
+                    <Text
+                        style={{
+                            marginHorizontal: 20,
+                            fontSize: 20,
+                            width: '100%',
+                            fontWeight: '500',
+                        }}>
+                        Invite and Share
+                    </Text>
+                </View>
+                <View
+                    style={{
+                        flexDirection: 'row',
+                        paddingHorizontal: 20,
+                        alignItems: 'center',
+                    }}>
+                    <Entypo name="info-with-circle" size={30} color="#2f95dc" />
+                    <Text
+                        style={{
+                            marginHorizontal: 20,
+                            fontSize: 20,
+                            width: '100%',
+                            fontWeight: '500',
+                        }}>
+                        About Us
+                    </Text>
+                </View>
+            </View>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <View style={{flex: 1, height: 1, backgroundColor: 'gray'}} />
+            </View>
+            <View
+                style={{
+                    flexDirection: 'row',
+                    paddingHorizontal: 20,
+                    flex: 0.2,
+                    alignItems: 'center',
+                }}>
+                <View style={{flexDirection: 'row', width: '100%'}}>
+                    <AntDesign name="poweroff" size={30} color="red" />
+                    <Text
+                        style={{
+                            marginHorizontal: 20,
+                            fontSize: 20,
+                            width: '100%',
+                            fontWeight: '500',
+                        }}>
                         Logout
                     </Text>
                 </View>
@@ -120,9 +221,8 @@ function OptionButton({icon, label, onPress, isLastOption}) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        // backgroundColor: '#fafafa',
-        backgroundColor: '#fff',
-        padding: 30,
+        backgroundColor: '#fafafa',
+        padding: 20,
     },
     leftSection: {
         flex: 0.4,
@@ -131,11 +231,10 @@ const styles = StyleSheet.create({
     },
     rightSection: {
         flex: 0.6,
-        alignItems: 'center',
     },
     welcomeContainer: {
         alignItems: 'center',
-        flex: 1,
+        flex: 0.5,
         flexDirection: 'row',
     },
     welcomeImage: {
