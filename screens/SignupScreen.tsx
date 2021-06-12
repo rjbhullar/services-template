@@ -1,5 +1,5 @@
 import * as React from 'react'
-import {StyleSheet, ImageBackground} from 'react-native'
+import {StyleSheet, ImageBackground, Image} from 'react-native'
 import {
     isRequired,
     validateEmail,
@@ -33,7 +33,12 @@ export default function SignupScreen({navigation}) {
             }}
             style={{flex: 1}}>
             <View style={styles.container}>
-                <Text style={styles.title}>Logo😊</Text>
+                <Image
+                    source={{
+                        uri: 'https://image.freepik.com/free-vector/red-sport-car-logo-icon_126523-964.jpg',
+                    }}
+                    style={{height: 100, width: 100}}
+                />
                 <Form
                     // containerStyle={{ marginBottom: 30, width: "90%" }}
                     fields={{
@@ -46,7 +51,6 @@ export default function SignupScreen({navigation}) {
                             },
                             inputProps: {
                                 autoCapitalize: 'words',
-                                name: 'user',
                             },
                         },
                         email: {

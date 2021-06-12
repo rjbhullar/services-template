@@ -1,5 +1,5 @@
 import * as React from 'react'
-import {StyleSheet, ImageBackground} from 'react-native'
+import {StyleSheet, ImageBackground, Image} from 'react-native'
 
 import EditScreenInfo from '../components/EditScreenInfo'
 import {Input, Button, Text} from 'react-native-elements'
@@ -29,7 +29,14 @@ export default function LoginScreen({navigation}) {
                 transform: [{scaleX: -1}],
             }}>
             <View style={[styles.container, {transform: [{scaleX: -1}]}]}>
-                <Text style={styles.title}>Logo😊</Text>
+                <Text style={styles.title}>
+                    <Image
+                        source={{
+                            uri: 'https://image.freepik.com/free-vector/red-sport-car-logo-icon_126523-964.jpg',
+                        }}
+                        style={{height: 100, width: 100}}
+                    />
+                </Text>
                 <Form
                     // containerStyle={{ marginBottom: 30, width: "90%" }}
                     fields={{
