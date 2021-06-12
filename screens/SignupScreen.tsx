@@ -12,23 +12,18 @@ import {Input, Button, Text} from 'react-native-elements'
 import {View} from '../components/Themed'
 import Form from '../components/Form'
 import ClearButton from '../components/ClearButton'
-
-let SIGNUP_FIELDS = [
-    {
-        placeholder: 'Name',
-        errorMessage: 'Please Enter Name',
-        onPress: '',
-        onChangeText: '',
-        keyboardType: 'email-address',
-    },
-]
+import makeAxiosRequest from '../api'
 
 const PASSWORD_REGEX =
-    /^(?=.*[A-Za-z])(?=.*d)(?=.*[$@$!%*#?&])[A-Za-zd$@$!%*#?&]{8,}$/
+    /^(?=.*[A-Za-z])(?=.*d)(?=.*[$@$!%*#?&])[A-Za-zd$@$!%*#?&]{8,}$/;
+
+const signupHandler = (payload) => {
+    return makeAxiosRequest('signup', payload)
+}
 
 export default function SignupScreen({navigation}) {
     const navigateToLogin = () => {
-        navigation.navigate('LoginPage')
+        navigation.navigate('signup')
     }
 
     return (
@@ -62,7 +57,7 @@ export default function SignupScreen({navigation}) {
                                 name: 'email',
                             },
                         },
-                        mobile: {
+                        mobileNumber: {
                             label: 'Mobile',
                             validators: [isRequired('Mobile'), validateMobile],
                             leftIcon: {
@@ -94,7 +89,7 @@ export default function SignupScreen({navigation}) {
                         },
                     }}
                     submitButtonText="Signup"
-                    onSubmit={() => {}}
+                    onSubmit={signupHandler}
                     afterSubmit={() => {}}
                 />
                 <ClearButton

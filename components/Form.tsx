@@ -1,5 +1,5 @@
 import {isLoaded} from 'expo-font'
-import * as React from 'react'
+import React, {useEffect} from 'react'
 
 import {
     View,
@@ -15,7 +15,7 @@ import {validateField, validateFields} from '../screens/formValidations'
 import CenteredView from './CenteredView'
 import {FontAwesome, Entypo, Ionicons, MaterialIcons} from '@expo/vector-icons'
 
-let icons = {FontAwesome, Entypo, Ionicons, MaterialIcons}
+const icons = {FontAwesome, Entypo, Ionicons, MaterialIcons}
 const iconCommonProps = {
     size: 20,
     color: '#b31b1b',
@@ -53,12 +53,13 @@ const Form = ({
 }) => {
     const fieldKeys = React.useMemo(() => Object.keys(fields), [fields])
     const [state, setState] = React.useReducer(stateReducer, {}, () => {
-        let blankValues = getInitialState(fieldKeys)
+        const blankValues = getInitialState(fieldKeys)
         return {
             values: blankValues,
             validationErrors: blankValues,
         }
     })
+    const {values, validationErrors} = state
 
     const onChangeValue = (key, value) => {
         setState((prevState) => ({
@@ -68,7 +69,7 @@ const Form = ({
     }
 
     const validateFieldOnBlur = (key, {validators}, fieldValue) => {
-        let error = validateField(validators, fieldValue)
+        const error = validateField(validators, fieldValue)
         setState((prevState) => ({
             validationErrors: {...prevState.validationErrors, [key]: error},
         }))
@@ -86,7 +87,7 @@ const Form = ({
         }
         if (isAsync) {
             setState({
-                isSubmitting: true,
+                formStatus: 'isSubmitting',
             })
             // try {
             //     const result = await onSubmit(...values);
@@ -97,7 +98,24 @@ const Form = ({
         }
     }
 
-    const {values, validationErrors} = state
+    useEffect(() => {
+        if (state.formStatus === 'isSubmitting') {
+            const handleFormSubmit = async () => {
+                try {
+                    const result = await onSubmit(values)
+                    // await afterSubmit(result)
+                } catch (e) {
+                    console.log('error:', e)
+                }
+            }
+            handleFormSubmit()
+        }
+    }, [state.formStatus])
+
+    const getIcon = (icon) => {
+        icon && (typeof icon === 'function' ? icon() : getIcon(icon))
+    }
+
     return (
         <CenteredView style={containerStyle}>
             {fieldKeys.map((key) => {
@@ -130,13 +148,8 @@ const Form = ({
                             value={fieldValue}
                             onChangeText={(text) => onChangeValue(key, text)}
                             errorStyle={{color: 'red'}}
-                            rightIcon={field.rightIcon && field.rightIcon()}
-                            leftIcon={
-                                typeof field.leftIcon &&
-                                (field.leftIcon === 'function'
-                                    ? field.leftIcon()
-                                    : getIcon(field.leftIcon))
-                            }
+                            rightIcon={getIcon(field.rightIcon)}
+                            leftIcon={getIcon(field.leftIcon)}
                             errorMessage={fieldError}
                             autoCapitalize="none"
                             {...field.inputProps}
@@ -148,9 +161,9 @@ const Form = ({
                 containerStyle={styles.submitButton}
                 title={submitButtonText}
                 onPress={submitForm}
-                disabled={state.isSubmitting}
+                disabled={state.formStatus === 'isSubmitting'}
                 icon={
-                    state.isSubmitting && (
+                    state.formStatus === 'isSubmitting' && (
                         <ActivityIndicator
                             color="#FFFFFF"
                             style={{paddingRight: 10}}

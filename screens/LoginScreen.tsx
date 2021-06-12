@@ -8,6 +8,12 @@ import Form from '../components/Form'
 import {isRequired, validateEmailOrMobile} from './formValidations'
 import {FontAwesome} from '@expo/vector-icons'
 import ClearButton from '../components/ClearButton'
+import makeAxiosRequest from '../api'
+
+const loginHandler = (payload) => {
+    return makeAxiosRequest('login', payload)
+}
+
 export default function LoginScreen({navigation}) {
     const navigateToSignup = () => {
         navigation.navigate('SignupPage')
@@ -56,7 +62,7 @@ export default function LoginScreen({navigation}) {
                         },
                     }}
                     submitButtonText="Login"
-                    onSubmit={() => {}}
+                    onSubmit={loginHandler}
                     afterSubmit={() => {}}
                 />
                 <ClearButton
