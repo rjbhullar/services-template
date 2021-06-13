@@ -1,11 +1,6 @@
 import * as React from 'react'
 import {StyleSheet, ImageBackground, Image} from 'react-native'
-import {
-    isRequired,
-    validateEmail,
-    validateMobile,
-    validateRegex,
-} from './formValidations'
+
 import {FontAwesome, Entypo, Ionicons, MaterialIcons} from '@expo/vector-icons'
 
 import {Input, Button, Text} from 'react-native-elements'
@@ -16,6 +11,86 @@ import makeAxiosRequest from '../api'
 
 const PASSWORD_REGEX =
     /^(?=.*[A-Za-z])(?=.*d)(?=.*[$@$!%*#?&])[A-Za-zd$@$!%*#?&]{8,}$/;
+
+const SIGNUP_FIELDS = {
+    name: {
+        label: 'Name',
+        validators: [
+            {
+                type: 'isRequired',
+                params: ['Name'],
+            },
+        ],
+        leftIcon: {
+            family: 'FontAwesome',
+            name: 'user',
+        },
+        inputProps: {
+            autoCapitalize: 'words',
+        },
+    },
+    email: {
+        label: 'Email',
+        validators: [
+            {
+                type: 'isRequired',
+                params: ['Email'],
+            },
+            {
+                type: 'validateEmail',
+            },
+        ],
+        leftIcon: {
+            family: 'Entypo',
+            name: 'email',
+        },
+    },
+    mobileNumber: {
+        label: 'Mobile',
+        validators: [
+            {
+                type: 'isRequired',
+                params: ['Mobile'],
+            },
+            {
+                type: 'validateMobile',
+            },
+        ],
+        leftIcon: {
+            family: 'Ionicons',
+            name: 'call',
+        },
+    },
+    password: {
+        label: 'Password',
+        validators: [
+            {
+                type: 'isRequired',
+                params: ['Password'],
+            },
+        ],
+        leftIcon: {
+            family: 'FontAwesome',
+            name: 'key',
+        },
+        inputProps: {
+            secureTextEntry: true,
+        },
+    },
+    confirmPassword: {
+        label: 'Confirm Password',
+        validators: [
+            {
+                type: 'isRequired',
+                params: ['Confirm Password'],
+            },
+        ],
+        leftIcon: {
+            family: 'MaterialIcons',
+            name: 'security',
+        },
+    },
+}
 
 const signupHandler = (payload) => {
     return makeAxiosRequest('signup', payload)
@@ -41,60 +116,9 @@ export default function SignupScreen({navigation}) {
                 />
                 <Form
                     // containerStyle={{ marginBottom: 30, width: "90%" }}
-                    fields={{
-                        name: {
-                            label: 'Name',
-                            validators: [isRequired('Name')],
-                            leftIcon: {
-                                family: 'FontAwesome',
-                                name: 'user',
-                            },
-                            inputProps: {
-                                autoCapitalize: 'words',
-                            },
-                        },
-                        email: {
-                            label: 'Email',
-                            validators: [isRequired('Email'), validateEmail],
-                            leftIcon: {
-                                family: 'Entypo',
-                                name: 'email',
-                            },
-                        },
-                        mobileNumber: {
-                            label: 'Mobile',
-                            validators: [isRequired('Mobile'), validateMobile],
-                            leftIcon: {
-                                family: 'Ionicons',
-                                name: 'call',
-                            },
-                        },
-                        password: {
-                            label: 'Password',
-                            validators: [
-                                isRequired('Password'),
-                                // validateRegex(PASSWORD_REGEX),
-                            ],
-                            leftIcon: {
-                                family: 'FontAwesome',
-                                name: 'key',
-                            },
-                            inputProps: {
-                                secureTextEntry: true,
-                            },
-                        },
-                        confirmPassword: {
-                            label: 'Confirm Password',
-                            validators: [isRequired('Confirm Password')],
-                            leftIcon: {
-                                family: 'MaterialIcons',
-                                name: 'security',
-                            },
-                        },
-                    }}
+                    fields={SIGNUP_FIELDS}
                     submitButtonText="Signup"
                     onSubmit={signupHandler}
-                    afterSubmit={() => {}}
                 />
                 <ClearButton
                     title="Already a Member? Signin"

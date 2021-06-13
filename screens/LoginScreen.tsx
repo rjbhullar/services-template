@@ -5,10 +5,46 @@ import EditScreenInfo from '../components/EditScreenInfo'
 import {Input, Button, Text} from 'react-native-elements'
 import {View} from '../components/Themed'
 import Form from '../components/Form'
-import {isRequired, validateEmailOrMobile} from './formValidations'
 import {FontAwesome} from '@expo/vector-icons'
 import ClearButton from '../components/ClearButton'
 import makeAxiosRequest from '../api'
+
+
+const SIGNIN_FIELDS = {
+    email: {
+        label: 'Email/Mobile',
+        validators: [
+            {
+                type: 'isRequired',
+                params: ['Email/Mobile'],
+            },
+            {
+                type: 'validateEmailOrMobile',
+            },
+        ],
+        leftIcon: {
+            family: 'FontAwesome',
+            name: 'user',
+        },
+    },
+    password: {
+        label: 'Password',
+        validators: [
+            {
+                type: 'isRequired',
+                params: ['Password'],
+            },
+        ],
+        leftIcon: {
+            family: 'FontAwesome',
+            name: 'key',
+        },
+        rightIcon: () => <Text style={{color: 'grey'}}>Forgot Password?</Text>,
+        inputProps: {
+            secureTextEntry: true,
+        },
+    },
+}
 
 
 const loginHandler = (payload) => {
@@ -40,38 +76,9 @@ export default function LoginScreen({navigation}) {
                 </Text>
                 <Form
                     // containerStyle={{ marginBottom: 30, width: "90%" }}
-                    fields={{
-                        email: {
-                            label: 'Email/Mobile',
-                            validators: [
-                                isRequired('Email/Mobile'),
-                                validateEmailOrMobile,
-                            ],
-                            leftIcon: {
-                                family: 'FontAwesome',
-                                name: 'user',
-                            },
-                        },
-                        password: {
-                            label: 'Password',
-                            validators: [isRequired('Password')],
-                            leftIcon: {
-                                family: 'FontAwesome',
-                                name: 'key',
-                            },
-                            rightIcon: () => (
-                                <Text style={{color: 'grey'}}>
-                                    Forgot Password?
-                                </Text>
-                            ),
-                            inputProps: {
-                                secureTextEntry: true,
-                            },
-                        },
-                    }}
+                    fields={SIGNIN_FIELDS}
                     submitButtonText="Login"
                     onSubmit={loginHandler}
-                    afterSubmit={() => {}}
                 />
                 <ClearButton
                     title="Not a Member? Signup"

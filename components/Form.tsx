@@ -47,7 +47,7 @@ const Form = ({
     fields,
     submitButtonText,
     onSubmit,
-    afterSubmit,
+    afterSubmit=()=>{},
     containerStyle = {},
     isAsync = true,
 }) => {
@@ -167,7 +167,7 @@ const Form = ({
                     state.formStatus === 'isSubmitting' && (
                         <ActivityIndicator
                             color="#FFFFFF"
-                            style={{paddingRight: 10}}
+                            style={{marginRight: 10}}
                         />
                     )
                 }
