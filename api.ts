@@ -1,11 +1,19 @@
 import axios from 'axios'
 axios.defaults.baseURL = 'http://localhost:3000/'
-const headers = {}
+const headers = {
+    'Content-Type': 'application/x-www-form-urlencoded',
+}
 
 const REQUESTS_DETAILS = {
     login: (data) => ({
         method: 'POST',
-        url: '/posts',
+        url: '/login',
+        headers,
+        data,
+    }),
+    signup: (data) => ({
+        method: 'POST',
+        url: '/signup',
         headers,
         data,
     }),

@@ -73,7 +73,7 @@ export default function SignupScreen({navigation}) {
                             label: 'Password',
                             validators: [
                                 isRequired('Password'),
-                                validateRegex(PASSWORD_REGEX),
+                                // validateRegex(PASSWORD_REGEX),
                             ],
                             leftIcon: {
                                 family: 'FontAwesome',

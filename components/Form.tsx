@@ -22,7 +22,7 @@ const iconCommonProps = {
     style: {marginRight: 10},
 }
 
-const getIcon = (iconDetails) => {
+const getIconComponent = (iconDetails) => {
     const Icon = icons[iconDetails.family]
     return <Icon {...iconCommonProps} {...iconDetails} />
 }
@@ -103,6 +103,7 @@ const Form = ({
             const handleFormSubmit = async () => {
                 try {
                     const result = await onSubmit(values)
+                    console.log('result: ', result);
                     // await afterSubmit(result)
                 } catch (e) {
                     console.log('error:', e)
@@ -113,7 +114,7 @@ const Form = ({
     }, [state.formStatus])
 
     const getIcon = (icon) => {
-        icon && (typeof icon === 'function' ? icon() : getIcon(icon))
+        return icon && (typeof icon === 'function' ? icon() : getIconComponent(icon))
     }
 
     return (

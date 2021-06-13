@@ -10,6 +10,7 @@ import {FontAwesome} from '@expo/vector-icons'
 import ClearButton from '../components/ClearButton'
 import makeAxiosRequest from '../api'
 
+
 const loginHandler = (payload) => {
     return makeAxiosRequest('login', payload)
 }
