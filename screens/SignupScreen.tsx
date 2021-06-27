@@ -119,6 +119,7 @@ export default function SignupScreen({navigation}) {
                     fields={SIGNUP_FIELDS}
                     submitButtonText="Signup"
                     onSubmit={signupHandler}
+                    afterSubmit={navigateToLogin}
                 />
                 <ClearButton
                     title="Already a Member? Signin"

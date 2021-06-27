@@ -7,9 +7,12 @@ import {
 } from '@expo/vector-icons'
 import * as WebBrowser from 'expo-web-browser'
 import * as React from 'react'
+import {useEffect} from 'react'
 import {StyleSheet, View, Image, Text, useWindowDimensions} from 'react-native'
 import {RectButton, ScrollView} from 'react-native-gesture-handler'
-
+import {SafeAreaProvider} from 'react-native-safe-area-context'
+import { Button, Divider} from 'react-native-elements'
+import Icon from '../components/Icon'
 function TabBarIcon(props: {
     name: React.ComponentProps<typeof Ionicons>['name']
     color: string
@@ -17,13 +20,67 @@ function TabBarIcon(props: {
     return <Ionicons size={30} style={{marginBottom: -3}} {...props} />
 }
 
-export default function LinksScreen() {
+let PROFILE_JSON = {
+    name: 'Mukul Saini',
+    email: 'mukulsaini95@gmail.com',
+    mobile: '+91-8802192265',
+    cta: [
+        {
+            icon: {
+                family: 'FontAwesome',
+                fontWeight: 100,
+                color: '#b31b1b',
+                name: 'history',
+            },
+            title: 'Order History',
+        },
+        {
+            icon: {
+                family: 'MaterialIcons',
+                fontWeight: 100,
+                color: '#b31b1b',
+                name: 'feedback',
+            },
+            title: 'Feedback',
+        },
+        {
+            icon: {
+                family: 'Entypo',
+                fontWeight: 100,
+                color: '#b31b1b',
+                name: 'help',
+            },
+            title: 'Help and Support',
+        },
+        {
+            icon: {
+                family: 'Entypo',
+                fontWeight: 100,
+                color: '#b31b1b',
+                name: 'share',
+            },
+            title: 'Invite and Share',
+        },
+        {
+            icon: {
+                family: 'Entypo',
+                fontWeight: 100,
+                color: '#b31b1b',
+                name: 'info',
+            },
+            title: 'About us',
+        },
+    ],
+}
+
+export default function ProfileScreen() {
     const windowWidth = useWindowDimensions().width
     const windowHeight = useWindowDimensions().height
+
     return (
         <View style={[styles.container]}>
             <View style={styles.welcomeContainer}>
-                <View style={[styles.leftSection]}>
+                <View>
                     <View
                         style={{
                             borderRadius: 1000,
@@ -40,163 +97,129 @@ export default function LinksScreen() {
                         />
                     </View>
                 </View>
-                <View style={styles.rightSection}>
-                    <View
-                        style={{
-                            flexDirection: 'row',
-                            padding: 5,
-                        }}>
-                        <FontAwesome name="user" size={25} color="#b31b1b" />
-                        <Text
-                            style={{
-                                fontWeight: 'bold',
-                                margin: 5,
-                                width: '100%',
-                            }}>
-                            Mukul Saini
-                        </Text>
-                    </View>
-                    <View style={{flexDirection: 'row', padding: 5}}>
-                        <Entypo name="email" size={20} color="#b31b1b" />
-                        <Text
-                            style={{
-                                fontWeight: 'bold',
-                                margin: 5,
-                                width: '100%',
-                            }}>
-                            mukulsaini95@gmail.com
-                        </Text>
-                    </View>
-                    <View style={{flexDirection: 'row', padding: 5}}>
-                        <Ionicons name="call" size={20} color="#b31b1b" />
-                        <Text
-                            style={{
-                                fontWeight: '600',
-                                margin: 5,
-                            }}>
-                            8802192265
-                        </Text>
-                    </View>
-                </View>
-            </View>
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                <View style={{flex: 1, height: 1, backgroundColor: 'gray'}} />
+                <Text
+                    style={{
+                        fontSize: 22,
+                        fontWeight: 'bold',
+                        marginVertical: 7,
+                        color: 'white',
+                        // width: '100%',
+                        textAlign: 'center',
+                    }}>
+                    {PROFILE_JSON.name}
+                </Text>
+                <Text
+                    style={{
+                        // fontWeight: 'bold',
+                        // margin: 5,
+                        // width: '100%',
+                        color: 'white',
+                        textAlign: 'center',
+                    }}>
+                    {PROFILE_JSON.mobile}
+                </Text>
+                <Text
+                    style={{
+                        // fontWeight: 'bold',
+                        // margin: 5,
+                        // width: '100%',
+                        color: 'white',
+                        textAlign: 'center',
+                        fontFamily: 'Cochin',
+                    }}>
+                    {PROFILE_JSON.email}
+                </Text>
             </View>
             <View
                 style={{
-                    justifyContent: 'space-evenly',
-                    flex: 1,
-                }}>
-                <View
-                    style={{
-                        flexDirection: 'row',
-                        paddingHorizontal: 20,
-                        // paddingVertical: 10,
-                        alignItems: 'center',
-                    }}>
-                    <AntDesign name="profile" size={30} color="#2f95dc" />
-                    <Text
-                        style={{
-                            marginHorizontal: 20,
-                            fontSize: 20,
-                            width: '100%',
-                            fontWeight: '500',
-                        }}>
-                        My Profile
-                    </Text>
-                </View>
-                <View
-                    style={{
-                        flexDirection: 'row',
-                        paddingHorizontal: 20,
-                        alignItems: 'center',
-                    }}>
-                    <MaterialIcons name="feedback" size={30} color="#2f95dc" />
-                    <Text
-                        style={{
-                            marginHorizontal: 20,
-                            fontSize: 20,
-                            width: '100%',
-                            fontWeight: '500',
-                        }}>
-                        Feedback
-                    </Text>
-                </View>
-                <View
-                    style={{
-                        flexDirection: 'row',
-                        paddingHorizontal: 20,
-                        alignItems: 'center',
-                    }}>
-                    <Entypo name="help-with-circle" size={30} color="#2f95dc" />
-                    <Text
-                        style={{
-                            marginHorizontal: 20,
-                            fontSize: 20,
-                            width: '100%',
-                            fontWeight: '500',
-                        }}>
-                        Help and Support
-                    </Text>
-                </View>
-                <View
-                    style={{
-                        flexDirection: 'row',
-                        paddingHorizontal: 20,
-                        alignItems: 'center',
-                    }}>
-                    <AntDesign name="sharealt" size={30} color="#2f95dc" />
-                    <Text
-                        style={{
-                            marginHorizontal: 20,
-                            fontSize: 20,
-                            width: '100%',
-                            fontWeight: '500',
-                        }}>
-                        Invite and Share
-                    </Text>
-                </View>
-                <View
-                    style={{
-                        flexDirection: 'row',
-                        paddingHorizontal: 20,
-                        alignItems: 'center',
-                    }}>
-                    <Entypo name="info-with-circle" size={30} color="#2f95dc" />
-                    <Text
-                        style={{
-                            marginHorizontal: 20,
-                            fontSize: 20,
-                            width: '100%',
-                            fontWeight: '500',
-                        }}>
-                        About Us
-                    </Text>
-                </View>
-            </View>
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                <View style={{flex: 1, height: 1, backgroundColor: 'gray'}} />
-            </View>
-            <View
-                style={{
-                    flexDirection: 'row',
-                    paddingHorizontal: 20,
-                    flex: 0.2,
+                    // justifyContent: 'space-evenly',
+                    // flex: 1,
+                    // flexDirection: 'row',
+                    justifyContent: 'center',
                     alignItems: 'center',
+                    width: '100%',
                 }}>
-                <View style={{flexDirection: 'row', width: '100%'}}>
-                    <AntDesign name="poweroff" size={30} color="red" />
-                    <Text
+                {PROFILE_JSON.cta.map((action, index) => (
+                    <View
+                        key={'action' + index}
                         style={{
-                            marginHorizontal: 20,
-                            fontSize: 20,
-                            width: '100%',
-                            fontWeight: '500',
+                            // justifyContent: 'space-evenly',
+                            // flex: 1,
+                            flexDirection: 'row',
+                            justifyContent: 'space-between',
+                            alignItems: 'center',
+                            width: '90%',
+                            borderRadius: 5,
+                            // shadowColor: 'grey',
+                            backgroundColor: 'white',
+                            margin: 10,
+                            height: 52,
+                            shadowColor: 'blue',
+                            // shadowOffset: {width: 0, height: 2},
+                            shadowOpacity: 0.1,
+                            // shadowRadius: 3,
+                            elevation: 3,
+                            paddingHorizontal: 7,
                         }}>
-                        Logout
-                    </Text>
-                </View>
+                        <View
+                            style={{
+                                flexDirection: 'row',
+                                justifyContent: 'space-between',
+                                alignItems: 'center',
+                            }}>
+                            {Icon(action.icon)}
+                            {/* <Divider  width={25} /> */}
+                        </View>
+                        <Text
+                            style={{
+                                // marginLeft: 5,
+                                fontSize: 22,
+                                // width: '100%',
+                                fontWeight: '500',
+                                color: 'black',
+                                textAlign: 'center',
+                            }}>
+                            {action.title}
+                        </Text>
+
+                        {Icon({
+                            family: 'Entypo',
+                            name: 'chevron-right',
+                            size: 22,
+                            color: 'grey',
+                        })}
+                        {/* </View> */}
+                    </View>
+                ))}
             </View>
+
+            {/* <Text
+                    style={{
+                        // marginHorizontal: 20,
+                        marginTop: 30,
+                        fontSize: 22,
+                        fontWeight: 'bold',
+                        width: '100%',
+                        color: '#b31b1b',
+                        // fontWeight: '500',
+                        textAlign: 'center',
+                    }}>
+                    Logout
+                </Text> */}
+            <Button
+                containerStyle={{borderRadius: 120, width: 100}}
+                title="Logout"
+                onPress={() => {}}
+                // icon={
+                //     state.formStatus === 'isSubmitting' && (
+                //         <ActivityIndicator
+                //             color="#FFFFFF"
+                //             style={{marginRight: 10}}
+                //         />
+                //     )
+                // }
+                raised
+            />
         </View>
     )
 }
@@ -221,21 +244,31 @@ function OptionButton({icon, label, onPress, isLastOption}) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fafafa',
-        padding: 20,
+        backgroundColor: '#F5F5F5',
+        // padding: 20,
+        alignItems: 'center',
+        // justifyContent:"center",
     },
     leftSection: {
-        flex: 0.4,
+        // flex: 0.4,
         // alignItems: "center",
         // justifyContent:"center",
     },
     rightSection: {
-        flex: 0.6,
+        // flex: 0.6,
     },
     welcomeContainer: {
+        // alignItems: 'center',
+        // flex: 0.5,
+        height: 300,
+        width: "100%",
+        // flexDirection: 'row',
+        paddingTop: 50,
         alignItems: 'center',
-        flex: 0.5,
-        flexDirection: 'row',
+        justifyContent: 'center',
+        backgroundColor: '#b31b1b',
+        // borderBottomLeftRadius: 30,
+        // borderBottomRightRadius: 30,
     },
     welcomeImage: {
         width: 120,

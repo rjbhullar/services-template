@@ -5,26 +5,20 @@ import {
     View,
     KeyboardAvoidingView,
     TextInput,
-    Text,
     ActivityIndicator,
     StyleSheet,
 } from 'react-native'
-import {ThemeProvider, Input, Button} from 'react-native-elements'
-import Animated from 'react-native-reanimated'
+import {Text, Input, Button} from 'react-native-elements'
 import {validateField, validateFields} from '../screens/formValidations'
 import CenteredView from './CenteredView'
 import {FontAwesome, Entypo, Ionicons, MaterialIcons} from '@expo/vector-icons'
+import Icon from './Icon'
 
 const icons = {FontAwesome, Entypo, Ionicons, MaterialIcons}
 const iconCommonProps = {
     size: 20,
     color: '#b31b1b',
     style: {marginRight: 10},
-}
-
-const getIconComponent = (iconDetails) => {
-    const Icon = icons[iconDetails.family]
-    return <Icon {...iconCommonProps} {...iconDetails} />
 }
 const getInitialState = (fieldKeys) => {
     const values = {}
@@ -47,7 +41,7 @@ const Form = ({
     fields,
     submitButtonText,
     onSubmit,
-    afterSubmit=()=>{},
+    afterSubmit,
     containerStyle = {},
     isAsync = true,
 }) => {
@@ -89,12 +83,6 @@ const Form = ({
             setState({
                 formStatus: 'isSubmitting',
             })
-            // try {
-            //     const result = await onSubmit(...values);
-            //     await afterSubmit(result);
-            // } catch (e) {
-            //     console.log("error:", e);
-            // }
         }
     }
 
@@ -104,9 +92,12 @@ const Form = ({
                 try {
                     const result = await onSubmit(values)
                     console.log('result: ', result);
-                    // await afterSubmit(result)
-                } catch (e) {
-                    console.log('error:', e)
+                    afterSubmit(result)
+                } catch (error) {
+                    console.log('error:', error);
+                    setState({
+                        formStatus: error.message,
+                    })
                 }
             }
             handleFormSubmit()
@@ -114,7 +105,7 @@ const Form = ({
     }, [state.formStatus])
 
     const getIcon = (icon) => {
-        return icon && (typeof icon === 'function' ? icon() : getIconComponent(icon))
+        return icon && (typeof icon === 'function' ? icon() : Icon(icon))
     }
 
     return (
@@ -158,6 +149,15 @@ const Form = ({
                     </CenteredView>
                 )
             })}
+            {state.formStatus && state.formStatus !== 'isSubmitting' && (
+                <Text style={{color: 'red'}}>
+                    {Icon({
+                        family: 'MaterialIcons',
+                        name: 'error',
+                        text: state.formStatus,
+                    })}
+                </Text>
+            )}
             <Button
                 containerStyle={styles.submitButton}
                 title={submitButtonText}

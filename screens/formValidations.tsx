@@ -1,46 +1,66 @@
 const formValidators = {
-    isRequired: (fieldName) => (value) => {
-        if (!value) {
-            return `${fieldName} is required`
-        }
+    isRequired: {
+        type: 'nested',
+        fn: (fieldName) => (value) => {
+            if (!value) {
+                return `${fieldName} is required`
+            }
+        },
     },
-    validateEmail: () => (value) => {
-        let emailRegex =
-            /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
-        if (!emailRegex.test(value)) {
-            return `Invalid Email`
-        }
+    validateEmail: {
+        type: 'normal',
+        fn: (value) => {
+            let emailRegex =
+                /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+            if (!emailRegex.test(value)) {
+                return `Invalid Email`
+            }
+        },
     },
-    validateMobile: () => (value) => {
-        let isInvalidValue = value != Number(value) || value.length !== 10
-        if (isInvalidValue) {
-            return `Invalid Mobile Number`
-        }
+    validateMobile: {
+        type: 'normal',
+        fn: (value) => {
+            let isInvalidValue = value != Number(value) || value.length !== 10
+            if (isInvalidValue) {
+                return `Invalid Mobile Number`
+            }
+        },
     },
-    validateRegex: (regex) => (value) => {
-        if (!regex.test(value)) {
-            return `Invalid Format Provided`
-        }
+    validateRegex: {
+        type: 'nested',
+        fn: (regex) => (value) => {
+            if (!regex.test(value)) {
+                return `Invalid Format Provided`
+            }
+        },
     },
-    validateEmailOrMobile: () => (value) => {
-        let emailError = formValidators.validateEmail()(value)
-        let mobileError = formValidators.validateMobile()(value)
-        if (emailError && mobileError) {
-            return 'Invalid Email/Mobile'
-        }
+    validateEmailOrMobile: {
+        type: 'normal',
+        fn: (value) => {
+            let emailError = formValidators.validateEmail.fn(value)
+            let mobileError = formValidators.validateMobile.fn(value)
+            if (emailError && mobileError) {
+                return 'Invalid Email/Mobile'
+            }
+        },
     },
-    validateLength: () => (text) => {
-        if (text && text.length < 4) {
-            return 'Must be 4 characters or more.'
-        }
+    validateLength: {
+        type: 'nested',
+        fn: (length) => (text) => {
+            if (text && text.length < length) {
+                return 'Must be 4 characters or more.'
+            }
+        },
     },
 }
 
 export const validateField = (validators, value) => {
     let errorMessage = ''
     validators.some(({type, params = []}) => {
-        const validator = formValidators[type](...params)
-        let validationError = validator(value)
+        const validator = formValidators[type]
+        const validatorFn =
+            validator.type === 'nested' ? validator.fn(...params) : validator.fn
+        let validationError = validatorFn(value)
         if (validationError) {
             errorMessage = validationError
             return true

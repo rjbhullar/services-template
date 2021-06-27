@@ -17,14 +17,14 @@ const LANDING_PAGE_DETAILS = {
             heading: [
                 {
                     color: 'black',
-                    text: 'HRS Services',
+                    text: 'Minta Car wash',
                     fontSize: 40,
                 },
             ],
             subHeading: [
                 {
                     color: 'grey',
-                    text: 'Leave it on us ✌️',
+                    text: 'Shine Bright like a dimaond💎',
                     fontSize: 23,
                 },
             ],

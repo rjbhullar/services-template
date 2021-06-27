@@ -1,13 +1,13 @@
 import axios from 'axios'
-axios.defaults.baseURL = 'http://localhost:3000/'
+axios.defaults.baseURL = 'http://192.168.1.35:3000'
 const headers = {
-    'Content-Type': 'application/x-www-form-urlencoded',
+    'Content-Type': 'application/json',
 }
 
 const REQUESTS_DETAILS = {
     login: (data) => ({
         method: 'POST',
-        url: '/login',
+        url: '/signin',
         headers,
         data,
     }),

@@ -56,6 +56,10 @@ export default function LoginScreen({navigation}) {
         navigation.navigate('SignupPage')
     }
 
+    const navigateToProfile = () => {
+        navigation.navigate('ProfilePage')
+    }
+
     return (
         <ImageBackground
             source={{
@@ -79,6 +83,7 @@ export default function LoginScreen({navigation}) {
                     fields={SIGNIN_FIELDS}
                     submitButtonText="Login"
                     onSubmit={loginHandler}
+                    afterSubmit={navigateToProfile}
                 />
                 <ClearButton
                     title="Not a Member? Signup"
